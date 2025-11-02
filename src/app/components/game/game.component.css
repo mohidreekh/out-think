@@ -1,0 +1,410 @@
+.game-container {
+  min-height: 100vh;
+  background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+  padding: 20px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+/* Header */
+.game-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  width: 100%;
+  max-width: 800px;
+  margin-bottom: 20px;
+}
+
+.stage-info {
+  text-align: right;
+}
+
+.stage-title {
+  font-size: 2.5rem;
+  color: white;
+  margin: 0;
+  font-weight: 900;
+  text-shadow: 0 4px 10px rgba(0, 0, 0, 0.3);
+  animation: slideInRight 0.5s ease;
+}
+
+.stage-subtitle {
+  color: rgba(255, 255, 255, 0.8);
+  font-size: 1.2rem;
+  margin: 5px 0 0 0;
+}
+
+.score-badge {
+  background: rgba(255, 255, 255, 0.2);
+  backdrop-filter: blur(10px);
+  padding: 15px 30px;
+  border-radius: 50px;
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  border: 2px solid rgba(255, 255, 255, 0.3);
+  animation: slideInLeft 0.5s ease;
+}
+
+.score-icon {
+  font-size: 2rem;
+  animation: rotate 3s linear infinite;
+}
+
+@keyframes rotate {
+  0% { transform: rotate(0deg); }
+  100% { transform: rotate(360deg); }
+}
+
+.score-value {
+  font-size: 2rem;
+  font-weight: 900;
+  color: #ffd700;
+  text-shadow: 0 2px 10px rgba(0, 0, 0, 0.3);
+}
+
+/* Progress Bar */
+.progress-container {
+  width: 100%;
+  max-width: 800px;
+  margin-bottom: 30px;
+}
+
+.progress-bar {
+  width: 100%;
+  height: 15px;
+  background: rgba(255, 255, 255, 0.2);
+  border-radius: 20px;
+  overflow: hidden;
+  box-shadow: inset 0 2px 5px rgba(0, 0, 0, 0.2);
+}
+
+.progress-fill {
+  height: 100%;
+  background: linear-gradient(90deg, #f093fb, #f5576c, #ffd700);
+  background-size: 200% 100%;
+  animation: progressShine 2s linear infinite;
+  border-radius: 20px;
+  transition: width 0.5s ease;
+  box-shadow: 0 0 20px rgba(245, 87, 108, 0.6);
+}
+
+@keyframes progressShine {
+  0% { background-position: 0% 50%; }
+  100% { background-position: 200% 50%; }
+}
+
+.progress-text {
+  text-align: center;
+  color: white;
+  font-size: 1.1rem;
+  margin-top: 8px;
+  font-weight: 600;
+}
+
+/* Question Card */
+.question-card {
+  background: rgba(255, 255, 255, 0.95);
+  padding: 30px;
+  border-radius: 25px;
+  max-width: 800px;
+  width: 100%;
+  margin-bottom: 30px;
+  box-shadow: 0 10px 40px rgba(0, 0, 0, 0.3);
+  animation: scaleIn 0.5s ease;
+}
+
+@keyframes scaleIn {
+  0% { transform: scale(0.8); opacity: 0; }
+  100% { transform: scale(1); opacity: 1; }
+}
+
+.question-text {
+  font-size: 2rem;
+  color: #333;
+  margin: 0;
+  font-weight: 700;
+  text-align: center;
+}
+
+/* VS Container */
+.vs-container {
+  display: flex;
+  justify-content: space-around;
+  align-items: center;
+  max-width: 800px;
+  width: 100%;
+  margin-bottom: 30px;
+  opacity: 0;
+  transform: translateY(-20px);
+  transition: all 0.5s ease;
+}
+
+.vs-container.show {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+.player-side,
+.computer-side {
+  flex: 1;
+  text-align: center;
+}
+
+.side-label {
+  color: white;
+  font-size: 1.2rem;
+  font-weight: 600;
+  margin-bottom: 10px;
+  text-shadow: 0 2px 5px rgba(0, 0, 0, 0.3);
+}
+
+.choice-display {
+  width: 100px;
+  height: 100px;
+  background: rgba(255, 255, 255, 0.2);
+  backdrop-filter: blur(10px);
+  border-radius: 20px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin: 0 auto;
+  border: 3px solid rgba(255, 255, 255, 0.4);
+  box-shadow: 0 8px 20px rgba(0, 0, 0, 0.2);
+}
+
+.choice-emoji {
+  font-size: 3.5rem;
+  animation: popIn 0.5s ease;
+}
+
+@keyframes popIn {
+  0% { transform: scale(0); }
+  50% { transform: scale(1.2); }
+  100% { transform: scale(1); }
+}
+
+.computer-thinking {
+  animation: pulse 1.5s ease-in-out infinite;
+}
+
+.computer-thinking.revealed {
+  animation: none;
+  background: rgba(255, 255, 255, 0.3);
+}
+
+@keyframes pulse {
+  0%, 100% { transform: scale(1); }
+  50% { transform: scale(1.05); }
+}
+
+.thinking-dots {
+  color: white;
+  font-size: 2rem;
+  font-weight: bold;
+}
+
+.thinking-dots span {
+  animation: blink 1.4s infinite;
+}
+
+.thinking-dots span:nth-child(2) {
+  animation-delay: 0.2s;
+}
+
+.thinking-dots span:nth-child(3) {
+  animation-delay: 0.4s;
+}
+
+@keyframes blink {
+  0%, 100% { opacity: 0.3; }
+  50% { opacity: 1; }
+}
+
+.vs-badge {
+  background: linear-gradient(135deg, #f093fb 0%, #f5576c 100%);
+  color: white;
+  width: 60px;
+  height: 60px;
+  border-radius: 50%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  font-size: 1.5rem;
+  font-weight: 900;
+  box-shadow: 0 5px 20px rgba(245, 87, 108, 0.5);
+  border: 3px solid white;
+}
+
+/* Options Grid */
+.options-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+  gap: 20px;
+  max-width: 800px;
+  width: 100%;
+  margin-bottom: 30px;
+}
+
+.options-grid.disabled {
+  pointer-events: none;
+  opacity: 0.6;
+}
+
+.option-btn {
+  background: rgba(255, 255, 255, 0.95);
+  border: 3px solid transparent;
+  border-radius: 20px;
+  padding: 25px;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  box-shadow: 0 5px 20px rgba(0, 0, 0, 0.2);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 10px;
+  animation: slideUp 0.5s ease backwards;
+}
+
+.option-btn:nth-child(1) { animation-delay: 0.1s; }
+.option-btn:nth-child(2) { animation-delay: 0.2s; }
+.option-btn:nth-child(3) { animation-delay: 0.3s; }
+.option-btn:nth-child(4) { animation-delay: 0.4s; }
+.option-btn:nth-child(5) { animation-delay: 0.5s; }
+
+@keyframes slideUp {
+  0% { transform: translateY(50px); opacity: 0; }
+  100% { transform: translateY(0); opacity: 1; }
+}
+
+.option-btn:hover {
+  transform: translateY(-8px) scale(1.05);
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3);
+  border-color: #f093fb;
+}
+
+.option-btn.selected {
+  background: linear-gradient(135deg, #f093fb 0%, #f5576c 100%);
+  border-color: white;
+  transform: scale(1.1);
+}
+
+.option-btn.selected .option-text {
+  color: white;
+}
+
+.option-emoji {
+  font-size: 3rem;
+}
+
+.option-text {
+  font-size: 1.2rem;
+  font-weight: 600;
+  color: #333;
+}
+
+/* Message Container */
+.message-container {
+  position: fixed;
+  bottom: 30px;
+  left: 50%;
+  transform: translateX(-50%);
+  z-index: 1000;
+  animation: slideInUp 0.5s ease;
+}
+
+@keyframes slideInUp {
+  0% { transform: translateX(-50%) translateY(100px); opacity: 0; }
+  100% { transform: translateX(-50%) translateY(0); opacity: 1; }
+}
+
+.message-content {
+  padding: 20px 40px;
+  border-radius: 50px;
+  backdrop-filter: blur(10px);
+  box-shadow: 0 10px 40px rgba(0, 0, 0, 0.3);
+  border: 2px solid rgba(255, 255, 255, 0.3);
+}
+
+.message-success .message-content {
+  background: rgba(76, 175, 80, 0.95);
+  animation: successPulse 0.5s ease;
+}
+
+.message-danger .message-content {
+  background: rgba(244, 67, 54, 0.95);
+  animation: shake 0.5s ease;
+}
+
+.message-warning .message-content {
+  background: rgba(255, 193, 7, 0.95);
+}
+
+@keyframes successPulse {
+  0%, 100% { transform: scale(1); }
+  50% { transform: scale(1.05); box-shadow: 0 0 30px rgba(76, 175, 80, 0.8); }
+}
+
+@keyframes shake {
+  0%, 100% { transform: translateX(0); }
+  25% { transform: translateX(-10px); }
+  75% { transform: translateX(10px); }
+}
+
+.message-text {
+  color: white;
+  font-size: 1.5rem;
+  font-weight: 700;
+  margin: 0;
+  text-shadow: 0 2px 5px rgba(0, 0, 0, 0.3);
+}
+
+/* Animations */
+@keyframes slideInRight {
+  0% { transform: translateX(50px); opacity: 0; }
+  100% { transform: translateX(0); opacity: 1; }
+}
+
+@keyframes slideInLeft {
+  0% { transform: translateX(-50px); opacity: 0; }
+  100% { transform: translateX(0); opacity: 1; }
+}
+
+/* Responsive */
+@media (max-width: 768px) {
+  .stage-title {
+    font-size: 1.8rem;
+  }
+
+  .question-text {
+    font-size: 1.5rem;
+  }
+
+  .options-grid {
+    grid-template-columns: repeat(auto-fit, minmax(120px, 1fr));
+    gap: 15px;
+  }
+
+  .option-emoji {
+    font-size: 2.5rem;
+  }
+
+  .option-text {
+    font-size: 1rem;
+  }
+
+  .choice-display {
+    width: 80px;
+    height: 80px;
+  }
+
+  .choice-emoji {
+    font-size: 2.5rem;
+  }
+
+  .message-text {
+    font-size: 1.2rem;
+  }
+}

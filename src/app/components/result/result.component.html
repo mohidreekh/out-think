@@ -1,0 +1,58 @@
+<div class="result-container">
+  <div class="result-content">
+    <div class="result-icon-container">
+      <div class="result-icon">{{ resultEmoji }}</div>
+      <div class="icon-glow"></div>
+    </div>
+
+    <h1 class="result-title">{{ resultMessage }}</h1>
+
+    <div class="score-display">
+      <div class="score-circle">
+        <div class="score-inner">
+          <span class="score-number">{{ score }}</span>
+          <span class="score-total">/ 7</span>
+        </div>
+      </div>
+      <p class="score-label">مراحل تم إكمالها بنجاح</p>
+    </div>
+
+    <div class="stats-grid">
+      <div class="stat-card">
+        <span class="stat-icon">🎯</span>
+        <p class="stat-value">{{ stage }}</p>
+        <p class="stat-label">آخر مرحلة</p>
+      </div>
+
+      <div class="stat-card">
+        <span class="stat-icon">📊</span>
+        <p class="stat-value">{{ (score / 7 * 100) | number:'1.0-0' }}%</p>
+        <p class="stat-label">نسبة النجاح</p>
+      </div>
+
+      <div class="stat-card">
+        <span class="stat-icon" *ngIf="!lost && score === 7">🏆</span>
+        <span class="stat-icon" *ngIf="lost || score < 7">💪</span>
+        <p class="stat-value" *ngIf="!lost && score === 7">فوز كامل!</p>
+        <p class="stat-value" *ngIf="lost || score < 7">حاول مجدداً</p>
+        <p class="stat-label">الحالة</p>
+      </div>
+    </div>
+
+    <div class="action-buttons">
+      <button class="restart-btn" (click)="restart()">
+        <span class="btn-icon">🔄</span>
+        <span class="btn-text">العب مرة أخرى</span>
+      </button>
+    </div>
+
+    <div class="motivational-text">
+      <p *ngIf="!lost && score === 7">🌟 أداء مثالي! أنت بطل حقيقي!</p>
+      <p *ngIf="score === 6">💪 كنت قريباً جداً من الفوز الكامل!</p>
+      <p *ngIf="score === 5">🎯 أداء رائع! استمر بالمحاولة!</p>
+      <p *ngIf="score >= 3 && score <= 4">👍 جيد! يمكنك تحسين أدائك!</p>
+      <p *ngIf="score >= 1 && score <= 2">🎮 الممارسة تصنع الإتقان!</p>
+      <p *ngIf="score < 1">💡 لا تستسلم! كل محاولة هي فرصة للتعلم!</p>
+    </div>
+  </div>
+</div>

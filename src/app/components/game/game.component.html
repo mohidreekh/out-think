@@ -1,0 +1,71 @@
+<div class="game-container">
+  <div class="game-header">
+    <div class="stage-info">
+      <h2 class="stage-title">المرحلة {{ currentStage }}</h2>
+      <p class="stage-subtitle">من {{ totalStages }}</p>
+    </div>
+
+    <div class="score-badge">
+      <span class="score-icon">⭐</span>
+      <span class="score-value">{{ score }}</span>
+    </div>
+  </div>
+
+  <div class="progress-container">
+    <div class="progress-bar">
+      <div class="progress-fill" [style.width.%]="progressWidth"></div>
+    </div>
+    <p class="progress-text">{{ score }} / {{ totalStages }}</p>
+  </div>
+
+  <div class="question-card">
+    <h3 class="question-text">{{ currentQuestion.text }}</h3>
+  </div>
+
+  <!-- Player vs Computer Display -->
+  <div class="vs-container" [class.show]="showReveal">
+    <div class="player-side">
+      <p class="side-label">أنت</p>
+      <div class="choice-display">
+        <span class="choice-emoji" *ngIf="playerChoice >= 0">
+          {{ currentQuestion.emojis[playerChoice] }}
+        </span>
+      </div>
+    </div>
+
+    <div class="vs-badge">VS</div>
+
+    <div class="computer-side">
+      <p class="side-label">الكمبيوتر</p>
+      <div class="choice-display computer-thinking" [class.revealed]="showReveal">
+        <span class="choice-emoji" *ngIf="showReveal">
+          {{ currentQuestion.emojis[computerChoice] }}
+        </span>
+        <span class="thinking-dots" *ngIf="!showReveal">
+          <span>.</span><span>.</span><span>.</span>
+        </span>
+      </div>
+    </div>
+  </div>
+
+  <!-- Options Grid -->
+  <div class="options-grid" [class.disabled]="disableChoices">
+    <button
+      *ngFor="let option of currentQuestion.options; let i = index"
+      class="option-btn"
+      [class.selected]="playerChoice === i"
+      [disabled]="disableChoices"
+      (click)="chooseOption(i)"
+    >
+      <span class="option-emoji">{{ currentQuestion.emojis[i] }}</span>
+      <span class="option-text">{{ option }}</span>
+    </button>
+  </div>
+
+  <!-- Message Display -->
+  <div class="message-container" *ngIf="showMessage" [class]="'message-' + messageType">
+    <div class="message-content">
+      <p class="message-text">{{ message }}</p>
+    </div>
+  </div>
+</div>
