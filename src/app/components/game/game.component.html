@@ -23,7 +23,7 @@
   </div>
 
   <!-- Player vs Computer Display -->
-  <div class="vs-container" [class.show]="showReveal">
+  <div class="vs-container show" *ngIf="showReveal">
     <div class="player-side">
       <p class="side-label">أنت</p>
       <div class="choice-display">
@@ -48,6 +48,7 @@
     </div>
   </div>
 
+
   <!-- Options Grid -->
   <div class="options-grid" [class.disabled]="disableChoices">
     <button
@@ -63,7 +64,7 @@
   </div>
 
   <!-- Message Display -->
-  <div class="message-container" *ngIf="showMessage" [class]="'message-' + messageType">
+  <div class="message-container" *ngIf="showMessage" [class]="'message-' + messageType" dir="rtl">
     <div class="message-content">
       <p class="message-text">{{ message }}</p>
     </div>

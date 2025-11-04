@@ -130,6 +130,23 @@
 }
 
 /* VS Container */
+/*.vs-container {*/
+/*  display: flex;*/
+/*  justify-content: space-around;*/
+/*  align-items: center;*/
+/*  max-width: 800px;*/
+/*  width: 100%;*/
+/*  margin-bottom: 30px;*/
+/*  opacity: 0;*/
+/*  transform: translateY(-20px);*/
+/*  transition: all 0.5s ease;*/
+/*}*/
+
+/*.vs-container.show {*/
+/*  opacity: 1;*/
+/*  transform: translateY(0);*/
+/*}*/
+
 .vs-container {
   display: flex;
   justify-content: space-around;
@@ -137,15 +154,17 @@
   max-width: 800px;
   width: 100%;
   margin-bottom: 30px;
+
   opacity: 0;
-  transform: translateY(-20px);
-  transition: all 0.5s ease;
+
+  transition: opacity 0.5s ease, transform 0.5s ease;
 }
 
 .vs-container.show {
   opacity: 1;
   transform: translateY(0);
 }
+
 
 .player-side,
 .computer-side {
@@ -322,7 +341,7 @@
 
 .message-content {
   padding: 20px 40px;
-  border-radius: 50px;
+  border-radius: 20px;
   backdrop-filter: blur(10px);
   box-shadow: 0 10px 40px rgba(0, 0, 0, 0.3);
   border: 2px solid rgba(255, 255, 255, 0.3);
@@ -407,4 +426,12 @@
   .message-text {
     font-size: 1.2rem;
   }
+}
+
+@media (max-width: 500px){
+  .options-grid {
+    grid-template-columns: repeat(auto-fit, minmax(80px, 1fr));
+    gap: 15px;
+  }
+
 }
